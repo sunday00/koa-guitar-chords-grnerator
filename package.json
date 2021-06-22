@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "node src",
+    "dev": "nodemon --L"
+  },
+  "dependencies": {
+    "koa": "^2.13.1",
+    "koa-router": "^10.0.0",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "eslint": "^7.29.0"
+  }
+}
