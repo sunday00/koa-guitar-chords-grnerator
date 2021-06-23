@@ -29,5 +29,36 @@
                 "tags": []
             }
         ]
+    },
+    {
+        "setName" : "rock-smith",
+        "description": "",
+        "sets": [
+            {
+                "name": "em",
+                "strings": [true, true, true, 2, 2, true],
+                "tags": []
+            },
+            {
+                "name": "e",
+                "strings": [true, true, 1, 2, 2, true],
+                "tags": []
+            },
+            {
+                "name": "f5",
+                "strings": [false, false, false, false, 3, 1],
+                "tags": []
+            },
+            {
+                "name": "g5",
+                "strings": [false, false, false, false, 5, 3],
+                "tags": []
+            },
+            {
+                "name": "a5",
+                "strings": [false, false, false, false, 7, 5],
+                "tags": []
+            }
+        ]
     }
 ]
