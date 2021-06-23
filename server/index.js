@@ -9,6 +9,11 @@ router.get("/", (ctx, next) => {
   next();
 });
 
+router.get("/api/chord/read", (ctx, next) => {
+  ctx.body = "home";
+  next();
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(4000, () => {

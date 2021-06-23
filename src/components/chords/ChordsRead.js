@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { readChord } from "../../modules/chord";
 
 const GString = ({ s, i, start }) => {
   return (
@@ -37,18 +39,26 @@ const GString = ({ s, i, start }) => {
   );
 };
 
-const ChordRead = () => {
-  const chord = {
-    name: "g7",
-    strings: [false, true, false, 17, 18, 17],
-    tags: [false, false, false, false, false, false],
-  };
+const ChordRead = ({}) => {
+  const dispatch = useDispatch();
+  const chord = useSelector((state) => state);
 
-  const start = Math.min(
-    ...chord.strings.filter((s) => s !== false && s !== true)
-  );
+  useEffect(() => {
+    dispatch(readChord());
+  }, [dispatch]);
 
-  return (
+  // const chord = {
+  //   name: "g7",
+  //   strings: [false, true, false, 17, 18, 17],
+  //   tags: [false, false, false, false, false, false],
+  // };
+
+  const start =
+    chord && chord.string
+      ? Math.min(...chord.strings.filter((s) => s !== false && s !== true))
+      : 0;
+
+  return chord && chord.string ? (
     <svg
       viewBox="0 0 400 400"
       width={400}
@@ -97,6 +107,8 @@ const ChordRead = () => {
         />
       ))}
     </svg>
+  ) : (
+    <></>
   );
 };
 
