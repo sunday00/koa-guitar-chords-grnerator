@@ -1,0 +1,33 @@
+[
+    {
+        "setName" : "ytb-leaning-guitar",
+        "description": "",
+        "sets": [
+            {
+                "name": "b5",
+                "strings": [false, false, 4, 4, 2, false],
+                "tags": []
+            },
+            {
+                "name": "f#5",
+                "strings": [false, false, false, 4, 4, 2],
+                "tags": []
+            },
+            {
+                "name": "g#5",
+                "strings": [false, false, false, 6, 6, 4],
+                "tags": []
+            },
+            {
+                "name": "e5",
+                "strings": [false, false, false, 2, 2, true],
+                "tags": []
+            },
+            {
+                "name": "a5",
+                "strings": [false, false, 2, 2, true, false],
+                "tags": []
+            }
+        ]
+    }
+]

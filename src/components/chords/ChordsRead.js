@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { readChord } from "../../modules/chord";
+import React from "react";
 
 const GString = ({ s, i, start }) => {
   return (
@@ -16,12 +14,12 @@ const GString = ({ s, i, start }) => {
       />
 
       {s === false ? (
-        <text x="15" y={i * 30 + 105} fill="#ED6E46" font-size="15">
+        <text x="15" y={i * 30 + 105} fill="#ED6E46" fontSize="15">
           X
         </text>
       ) : (
         <>
-          <text x="15" y={i * 30 + 105} fill="#ED6E46" font-size="15">
+          <text x="15" y={i * 30 + 105} fill="#ED6E46" fontSize="15">
             O
           </text>
 
@@ -39,43 +37,29 @@ const GString = ({ s, i, start }) => {
   );
 };
 
-const ChordRead = ({}) => {
-  const dispatch = useDispatch();
-  const chord = useSelector((state) => state);
-
-  useEffect(() => {
-    dispatch(readChord());
-  }, [dispatch]);
-
-  // const chord = {
-  //   name: "g7",
-  //   strings: [false, true, false, 17, 18, 17],
-  //   tags: [false, false, false, false, false, false],
-  // };
-
+const ChordRead = ({chord}) => {
   const start =
-    chord && chord.string
+    chord && chord.strings
       ? Math.min(...chord.strings.filter((s) => s !== false && s !== true))
       : 0;
 
-  return chord && chord.string ? (
+  return chord && chord.strings ? (
     <svg
       viewBox="0 0 400 400"
       width={400}
-      height={400}
       preserveAspectRatio="xMinYMin meet"
       className="tab"
     >
       <rect fill="#fff" x="0" y="0" width="400" height="400" />
       {chord.strings.map((s, i) => (
-        <GString s={s} i={i} start={start} />
+        <GString s={s} i={i} start={start} key={i} />
       ))}
 
       <text
         x="45"
         y="65"
         fill="#ED6E46"
-        font-size="30"
+        fontSize="30"
         fontWeight="bold"
         className="start"
       >
@@ -88,7 +72,7 @@ const ChordRead = ({}) => {
         x="180"
         y="320"
         fill="#ED6E46"
-        font-size="40"
+        fontSize="40"
         fontWeight="bold"
         className="chord name"
       >

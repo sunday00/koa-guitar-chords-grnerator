@@ -1,18 +1,22 @@
 const Koa = require("koa");
 const Router = require("koa-router");
 
+const chords = require('./chords');
+
 const app = new Koa();
 const router = new Router();
 
-router.get("/", (ctx, next) => {
-  ctx.body = "home";
-  next();
-});
+router.use('/api/chord', chords.routes());
 
-router.get("/api/chord/read", (ctx, next) => {
-  ctx.body = "home";
-  next();
-});
+// router.get("/", (ctx, next) => {
+//   ctx.body = "home";
+//   next();
+// });
+
+// router.get("/api/chord/read", (ctx, next) => {
+//   ctx.body = ctx.request.query;
+//   next();
+// });
 
 app.use(router.routes()).use(router.allowedMethods());
 

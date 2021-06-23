@@ -4,10 +4,10 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
-import chord, { chordSaga } from "./chord";
+import chords, { chordSaga } from "./chords";
 
 const rootReducer = combineReducers({
-  chord,
+  chords,
 });
 
 export function* rootSaga() {

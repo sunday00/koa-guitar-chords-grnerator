@@ -2,7 +2,9 @@ import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 
-import ChordsRead from "./components/chords/ChordsRead";
+import Home from "./components/main/Home";
+import ChordReadContainer from "./containers/chords/ChordReadContainer";
+import ChordListContainer from "./containers/chords/ChordListContainer";
 import store from "./modules/index";
 
 function App() {
@@ -11,9 +13,17 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Route
-            render={() => <ChordsRead />}
-            path={["/chord/read/:provider/:id"]}
+            render={(props) => <Home {...props} />}
+            path="/"
             exact
+          />
+          <Route
+            render={(props) => <ChordReadContainer {...props} />}
+            path="/chord/read/:provider/:id"
+          />
+          <Route
+            render={(props) => <ChordListContainer {...props} />}
+            path="/chord/list/:provider"
           />
         </BrowserRouter>
       </Provider>
