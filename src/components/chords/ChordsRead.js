@@ -37,7 +37,7 @@ const GString = ({ s, i, start }) => {
   );
 };
 
-const ChordRead = ({chord}) => {
+const ChordRead = ({ chord }) => {
   const start =
     chord && chord.strings
       ? Math.min(...chord.strings.filter((s) => s !== false && s !== true))

@@ -36,16 +36,14 @@ const initialState = [];
 
 const chords = handleActions(
   {
-    [READ_CHORD_DONE]: (state, { payload: chord }) => ([
+    [READ_CHORD_DONE]: (state, { payload: chord }) => [
       {
         name: chord.name,
         strings: chord.strings,
         tags: chord.tags,
-      }
-    ]),
-    [LIST_CHORD_DONE]: (state, { payload: chords }) => ([
-      ...chords
-    ]),
+      },
+    ],
+    [LIST_CHORD_DONE]: (state, { payload: chords }) => [...chords],
   },
   initialState
 );
