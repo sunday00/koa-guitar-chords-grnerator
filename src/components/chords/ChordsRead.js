@@ -23,7 +23,7 @@ const GString = ({ s, i, start }) => {
             O
           </text>
 
-          {s !== true && (
+          {s !== true && s!==undefined && (
             <circle
               cx={(s - start + 1) * 65 + 8}
               cy={i * 30 + 100}
@@ -37,18 +37,17 @@ const GString = ({ s, i, start }) => {
   );
 };
 
-const ChordRead = ({ chord }) => {
+const ChordRead = ({ chord, className, getStartFrame }) => {
   const start =
     chord && chord.strings
-      ? Math.min(...chord.strings.filter((s) => s !== false && s !== true))
-      : 0;
+      ? getStartFrame()
+      : 1;
 
   return chord && chord.strings ? (
     <svg
       viewBox="0 0 400 400"
-      width={400}
       preserveAspectRatio="xMinYMin meet"
-      className="tab"
+      className={`tab ${className}`}
     >
       <rect fill="#fff" x="0" y="0" width="400" height="400" />
       {chord.strings.map((s, i) => (

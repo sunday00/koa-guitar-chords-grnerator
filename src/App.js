@@ -6,6 +6,7 @@ import Home from "./components/main/Home";
 import ChordReadContainer from "./containers/chords/ChordReadContainer";
 import ChordListContainer from "./containers/chords/ChordListContainer";
 import store from "./modules/index";
+import ChordCreateContainer from "./containers/chords/ChordCreateContainer";
 
 function App() {
   return (
@@ -15,6 +16,11 @@ function App() {
           <Route
             render={(props) => <Home {...props} />}
             path="/"
+            exact
+          />
+          <Route
+            render={(props) => <ChordCreateContainer {...props} />}
+            path="/chord/create"
             exact
           />
           <Route
