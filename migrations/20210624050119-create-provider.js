@@ -15,6 +15,16 @@ module.exports = {
         allowNull: true,
         type: Sequelize.TEXT,
       },
+      accountId: {
+        type: Sequelize.Sequelize.INTEGER(11).UNSIGNED,
+        allowNull: false,
+        references: {
+          model: "accounts",
+          key: "id",
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade",
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

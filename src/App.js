@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import HomeContainer from "./containers/main/HomeContainer";
+import Header from "./containers/main/Header";
 import ChordReadContainer from "./containers/chords/ChordReadContainer";
 import ChordListContainer from "./containers/chords/ChordListContainer";
 import store from "./modules/index";
@@ -21,7 +22,7 @@ function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <header></header>
+        <Header />
 
         <BrowserRouter>
           <Route
