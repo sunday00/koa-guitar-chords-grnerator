@@ -6,6 +6,7 @@ import ChordRead from "../../components/chords/ChordsRead";
 const ChordReadContainer = ({ match }) => {
   const dispatch = useDispatch();
   const chords = useSelector((state) => state.chords);
+
   useEffect(() => {
     dispatch(readChord(match));
   }, [dispatch, match]);

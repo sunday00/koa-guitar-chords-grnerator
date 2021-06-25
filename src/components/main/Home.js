@@ -1,9 +1,17 @@
 import React from "react";
 
-const Home = () => {
+const Home = ({ providers }) => {
   return (
     <ul>
-      <a href="http://localhost:3000/chord/list/1">list ytb-leaning-guitar</a>
+      {providers &&
+        providers.length > 0 &&
+        providers.map((p, i) => {
+          return (
+            <li key={i}>
+              <a href={`/chord/list/${p.id}`}>{p.name}</a>
+            </li>
+          );
+        })}
     </ul>
   );
 };

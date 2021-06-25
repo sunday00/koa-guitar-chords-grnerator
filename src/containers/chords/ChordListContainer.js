@@ -13,7 +13,9 @@ const ChordListContainer = ({ match }) => {
   return chords.length >= 1 ? (
     <>
       {chords.map((c, i) => (
-        <ChordRead chord={c} key={i} />
+        <a href={`/chord/read/${match.params.provider}/${c.id}`} key={i}>
+          <ChordRead chord={c} />
+        </a>
       ))}
     </>
   ) : (
