@@ -4,3 +4,7 @@ export const getStartFrame = (chord) => {
   );
   return min !== Infinity ? min : 1;
 };
+
+export const addTime = (t, add) => {
+  return new Date(new Date(t).setHours(t.getHours() + add));
+};

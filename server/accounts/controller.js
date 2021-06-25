@@ -1,5 +1,6 @@
 const db = require("../../models");
 const printer = require("../utils/Printer");
+const jwt = require("../utils/jwt");
 
 exports.generate = async (ctx, next) => {
   const a = await db.Account.findOne({
@@ -45,9 +46,16 @@ exports.login = async (ctx, next) => {
     },
   });
 
+  const token = await jwt.genToken(user);
+
+  ctx.cookies.set("access_token", token, {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60,
+  });
+
   ctx.body = await {
     result: "success",
-    user,
+    token,
   };
 
   await next();
