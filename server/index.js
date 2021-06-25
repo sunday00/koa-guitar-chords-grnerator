@@ -1,12 +1,15 @@
 const Koa = require("koa");
 const Router = require("koa-router");
+const bodyParser = require("koa-bodyparser");
 
-const chords = require('./chords');
+const chords = require("./chords");
 
 const app = new Koa();
 const router = new Router();
 
-router.use('/api/chord', chords.routes());
+app.use(bodyParser());
+
+router.use("/api/chord", chords.routes());
 
 // router.get("/", (ctx, next) => {
 //   ctx.body = "home";

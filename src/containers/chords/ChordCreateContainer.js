@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import ChordRead from "../../components/chords/ChordsRead";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckSquare, faSquare } from "@fortawesome/free-solid-svg-icons";
+
+import * as util from "../../lib/util";
 import { postChord as api } from "../../lib/chord";
 
 const ChordCreateContainer = ({ match }) => {
@@ -22,13 +24,6 @@ const ChordCreateContainer = ({ match }) => {
   const [err, setErr] = useState({
     msg: "",
   });
-
-  const getStartFrame = () => {
-    const min = Math.min(
-      ...chord.strings.filter((s) => s !== false && s !== true)
-    );
-    return min !== Infinity ? min : 1;
-  };
 
   const handleChangeStart = (e) => {
     if (e.target.value === "") return;
@@ -85,7 +80,7 @@ const ChordCreateContainer = ({ match }) => {
 
   const handleClick = (e, r, f) => {
     let newStrings = Array.from(chord.strings);
-    newStrings[r] = f + getStartFrame() - 1;
+    newStrings[r] = f + util.getStartFrame(chord) - 1;
 
     if (newStrings[r] === Infinity) {
       newStrings[r] = 1;
@@ -120,6 +115,15 @@ const ChordCreateContainer = ({ match }) => {
     api({
       provider: match.params.provider,
       chord: chord,
+    }).then((res) => {
+      if (res.data.result === "success") {
+        window.location.href = `/chord/read/${match.params.provider}/${res.data.id}`;
+      } else if (res.data.result === "error") {
+        setErr({
+          ...err,
+          msg: res.data.message,
+        });
+      }
     });
   };
 
@@ -129,11 +133,7 @@ const ChordCreateContainer = ({ match }) => {
 
   return (
     <form className="chord-input-form" onSubmit={handleSubmit}>
-      <ChordRead
-        chord={chord}
-        className="input"
-        getStartFrame={getStartFrame}
-      />
+      <ChordRead chord={chord} className="input" />
 
       <div className="svgOverWrap">
         <div className="outer">
@@ -217,7 +217,7 @@ const ChordCreateContainer = ({ match }) => {
                 type="number"
                 min="1"
                 max="24"
-                value={getStartFrame()}
+                value={util.getStartFrame(chord)}
                 required
               />
               <span>fr</span>
@@ -250,7 +250,7 @@ const ChordCreateContainer = ({ match }) => {
                 name="name"
                 onChange={(e) => handleChangeName(e)}
                 type="text"
-                maxLength="10"
+                maxLength="8"
                 placeholder="ex) g7"
                 required
               />

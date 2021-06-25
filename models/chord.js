@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Chord.init(
     {
-      id: { type: DataTypes.INTEGER, primaryKey: true },
+      id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       setId: {
         type: DataTypes.INTEGER,
         references: { model: "Provider", key: "id" },

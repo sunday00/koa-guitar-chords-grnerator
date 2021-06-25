@@ -1,4 +1,5 @@
 import React from "react";
+import * as util from "../../lib/util";
 
 const GString = ({ s, i, start }) => {
   return (
@@ -23,7 +24,7 @@ const GString = ({ s, i, start }) => {
             O
           </text>
 
-          {s !== true && s!==undefined && (
+          {s !== true && s !== undefined && (
             <circle
               cx={(s - start + 1) * 65 + 8}
               cy={i * 30 + 100}
@@ -37,11 +38,8 @@ const GString = ({ s, i, start }) => {
   );
 };
 
-const ChordRead = ({ chord, className, getStartFrame }) => {
-  const start =
-    chord && chord.strings
-      ? getStartFrame()
-      : 1;
+const ChordRead = ({ chord, className }) => {
+  const start = chord && chord.strings ? util.getStartFrame(chord) : 1;
 
   return chord && chord.strings ? (
     <svg
@@ -71,9 +69,10 @@ const ChordRead = ({ chord, className, getStartFrame }) => {
         x="180"
         y="320"
         fill="#ED6E46"
-        fontSize="40"
+        fontSize={className === "input" ? "23" : "40"}
         fontWeight="bold"
         className="chord name"
+        textAnchor="middle"
       >
         {chord.name}
       </text>

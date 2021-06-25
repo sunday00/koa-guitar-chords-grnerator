@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.0.0",
     "mysql2": "^2.2.5",
     "node-sass": "^5.0.0",

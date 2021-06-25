@@ -1,5 +1,41 @@
 const db = require("../../models");
 
+exports.create = async (ctx, next) => {
+  const { provider, chord } = ctx.request.body;
+
+  const { name, strings, memo } = chord;
+
+  const modifiedStrings = strings.map((s) => {
+    switch (s) {
+      case true:
+        return "t";
+      case false:
+        return "f";
+      default:
+        return s;
+    }
+  });
+
+  await db.Chord.create({
+    setId: provider,
+    strings: modifiedStrings.join("/"),
+    name,
+    memo,
+  })
+    .then((result) => {
+      ctx.body = {
+        result: "success",
+        id: result.id,
+      };
+    })
+    .catch((err) => {
+      ctx.body = {
+        result: "error",
+        message: err.message,
+      };
+    });
+};
+
 exports.list = async (ctx, next) => {
   let data = await db.Chord.findAll({
     attributes: ["id", "setId", "name", "strings", "memo", "createdAt"],

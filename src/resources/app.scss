@@ -6,6 +6,10 @@ html, body{
 body {
   background-color: #ddd;
 
+  textarea{
+    resize: none;
+  }
+  
   .err.active{
     position: fixed;
     width: 100vw;
@@ -104,10 +108,11 @@ body {
     }
     
     input.name{
+      box-sizing: border-box;
       font-size: 3.2rem;
-      width: 80%;
+      width: 100%;
       display: block;
-      margin: 3% auto;
+      margin: 0 auto;
       text-align: center;
       color: tomato;
       border: none;
@@ -123,7 +128,7 @@ body {
     }
   }
 
-  .tab.input, .svgOverWrap{
+  .tab.input, .tab.read, .svgOverWrap{
     width: 100%;
     max-width: 600px;
     display: block;
