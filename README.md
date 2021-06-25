@@ -12,3 +12,5 @@ https://ms-dev.tistory.com/10
 256
 
 https://ithub.tistory.com/219
+
+openssl rand -hex 64

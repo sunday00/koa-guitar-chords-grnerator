@@ -35,3 +35,20 @@ exports.generate = async (ctx, next) => {
 
   await next();
 };
+
+exports.login = async (ctx, next) => {
+  const user = await db.Account.findOne({
+    attributes: ["id", "userId", "email"],
+    where: {
+      userId: ctx.request.body.id,
+      password: db.Account.hash(ctx.request.body.pass),
+    },
+  });
+
+  ctx.body = await {
+    result: "success",
+    user,
+  };
+
+  await next();
+};
