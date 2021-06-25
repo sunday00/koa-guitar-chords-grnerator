@@ -13,14 +13,10 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <BrowserRouter>
-          <Route
-            render={(props) => <Home {...props} />}
-            path="/"
-            exact
-          />
+          <Route render={(props) => <Home {...props} />} path="/" exact />
           <Route
             render={(props) => <ChordCreateContainer {...props} />}
-            path="/chord/create"
+            path="/chord/create/:provider"
             exact
           />
           <Route
