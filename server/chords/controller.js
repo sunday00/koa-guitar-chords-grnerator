@@ -41,8 +41,6 @@ exports.create = async (ctx, next) => {
 };
 
 exports.list = async (ctx, next) => {
-    
-
   let data = await db.Chord.findAll({
     attributes: ["id", "setId", "name", "strings", "memo", "createdAt"],
     include: {

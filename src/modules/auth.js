@@ -12,6 +12,7 @@ export const checkAuth = createAction(
 
 function* checkAuthSaga(action) {
   const auth = yield call(api, action.payload);
+
   yield put({
     type: CHECK_AUTH_DONE,
     payload: auth,

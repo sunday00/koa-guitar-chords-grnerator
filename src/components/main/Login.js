@@ -30,6 +30,7 @@ const Login = () => {
 
     main.login(user).then((res) => {
       if (res.data.result === "success") {
+        
         const expireTime = util.addTime(new Date(), 1);
 
         localStorage.setItem("auth", "1");
@@ -39,11 +40,13 @@ const Login = () => {
             "-" +
             ("0" + (expireTime.getMonth() + 1)).slice(-2) +
             "-" +
-            ("0" + (expireTime.getDate() + 1)).slice(-2) +
+            ("0" + expireTime.getDate()).slice(-2) +
             "T" +
-            ("0" + (expireTime.getHours() + 1)).slice(-2) +
+            ("0" + expireTime.getHours()).slice(-2) +
             ":" +
-            ("0" + (expireTime.getMinutes() + 1)).slice(-2)
+            ("0" + expireTime.getMinutes()).slice(-2) + 
+            ":" +
+            ("0" + expireTime.getSeconds()).slice(-2)
         );
 
         dispatch( checkAuth() );

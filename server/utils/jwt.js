@@ -37,8 +37,9 @@ exports.checkToken = async (ctx, next) => {
       return;
     }
 
-    console.log(validated);
+    ctx.state.validated = validated;
 
     await next();
   });
 }
+

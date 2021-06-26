@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Provider.init(
     {
-      id: { type: DataTypes.INTEGER, primaryKey: true },
+      id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       name: DataTypes.STRING(100),
       description: { type: DataTypes.TEXT, allowNull: true },
-      userId: {
+      accountId: {
         type: DataTypes.INTEGER,
         references: { model: "Account", key: "id" },
       },
