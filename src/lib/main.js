@@ -6,3 +6,7 @@ export const login = (user) => {
     pass: user.pass,
   });
 };
+
+export const logout = () => {
+  return client.get(`/account/logout`);
+}

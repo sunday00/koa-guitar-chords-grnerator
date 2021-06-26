@@ -3,17 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { listProvider } from "../../modules/providers";
 import Home from "../../components/main/Home";
 
-import { checkAuth } from "../../lib/util";
-
 const HomeContainer = ({ match }) => {
   const dispatch = useDispatch();
   const providers = useSelector((state) => state.providers);
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if( checkAuth() ){
+    if(auth){
       dispatch(listProvider());
     }
-  }, [dispatch, match]);
+  }, [dispatch, match, auth]);
 
   return <Home providers={providers} />;
 };

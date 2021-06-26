@@ -60,3 +60,16 @@ exports.login = async (ctx, next) => {
 
   await next();
 };
+
+exports.logout = async (ctx, next) => {
+  ctx.cookies.set("access_token", "", {
+    httpOnly: true,
+    maxAge: 0,
+  });
+
+  ctx.body = await {
+    result: "success",
+  };
+
+  await next();
+}
