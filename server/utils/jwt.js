@@ -15,3 +15,30 @@ exports.genToken = (user) => {
     }
   );
 };
+
+exports.checkToken = async (ctx, next) => {
+  const token = ctx.cookies.get('access_token');
+
+  if(!token){
+    ctx.body = {
+      result: "error",
+      message: "You need to logged in",
+    };
+
+    return;
+  }
+
+  await jwt.verify(token, jwtSec+jwtSlt, async(err, validated) => {
+    if(err){
+      ctx.body = {
+        result: "error",
+        message: err.message,
+      };
+      return;
+    }
+
+    console.log(validated);
+
+    await next();
+  });
+}

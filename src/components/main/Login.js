@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import {checkAuth} from "../../modules/auth";
+
 import * as main from "../../lib/main";
 import * as util from "../../lib/util";
+
 
 const Login = () => {
   const [user, setUser] = useState({
     id: "",
     pass: "",
   });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch( checkAuth() );
+  }, [dispatch]);
 
   const handleChange = (e, field) => {
     setUser({
@@ -29,12 +39,14 @@ const Login = () => {
             "-" +
             ("0" + (expireTime.getMonth() + 1)).slice(-2) +
             "-" +
-            expireTime.getDate() +
+            ("0" + (expireTime.getDate() + 1)).slice(-2) +
             "T" +
-            expireTime.getHours() +
+            ("0" + (expireTime.getHours() + 1)).slice(-2) +
             ":" +
-            expireTime.getMinutes()
+            ("0" + (expireTime.getMinutes() + 1)).slice(-2)
         );
+
+        dispatch( checkAuth() );
       }
     });
   };

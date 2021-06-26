@@ -27,16 +27,22 @@ exports.create = async (ctx, next) => {
         result: "success",
         id: result.id,
       };
+
+      next();
     })
     .catch((err) => {
       ctx.body = {
         result: "error",
         message: err.message,
       };
+
+      next();
     });
 };
 
 exports.list = async (ctx, next) => {
+    
+
   let data = await db.Chord.findAll({
     attributes: ["id", "setId", "name", "strings", "memo", "createdAt"],
     include: {

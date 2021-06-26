@@ -1,8 +1,5 @@
 import client from "./client";
 
-export const getProviders = ({ params }) => {
-  if (params) {
-    return client.get(`/api/provider/list`);
-  }
+export const getProviders = () => {
   return client.get("/api/provider/list");
 };
