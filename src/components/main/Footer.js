@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faList,
-  faPencilRuler,
+  faGuitar,
+  faMusic
 } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = ({pathname}) => {
@@ -27,10 +28,16 @@ const Footer = ({pathname}) => {
                     }
                     {
                         pathname.startsWith("/chord/list") && 
-                        <li>
-                            <a href={`/chord/create/${pathname.split("/")[3]}`}> <FontAwesomeIcon icon={faPencilRuler} />
-                            </a>
-                        </li>
+                        <>
+                            <li>
+                                <a href={`/chord/create/${pathname.split("/")[3]}`}> <FontAwesomeIcon icon={faGuitar} />
+                                </a>
+                            </li>
+                            <li>
+                                <a href={`/song/create/${pathname.split("/")[3]}`}> <FontAwesomeIcon icon={faMusic} />
+                                </a>
+                            </li>
+                        </>
                     }
                 </ul>
             </nav>

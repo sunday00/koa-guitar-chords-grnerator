@@ -8,6 +8,7 @@ import ChordReadContainer from "./containers/chords/ChordReadContainer";
 import ChordListContainer from "./containers/chords/ChordListContainer";
 import ChordCreateContainer from "./containers/chords/ChordCreateContainer";
 import ProviderCreateContainer from "./containers/providers/ProviderCreateContainer";
+import SongCreateContainer from "./containers/songs/SongCreateContainer";
 import Footer from "./components/main/Footer";
 
 import store from "./modules/index";
@@ -43,6 +44,12 @@ function App() {
           <Route
             render={(props) => <ProviderCreateContainer {...props} />}
             path="/provider/create"
+            exact
+          />
+
+          <Route
+            render={(props) => <SongCreateContainer {...props} />}
+            path="/song/create/:provider"
             exact
           />
         </BrowserRouter>

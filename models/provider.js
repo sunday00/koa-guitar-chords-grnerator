@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Chord, { foreignKey: "setId" });
+      this.hasMany(models.Song, { foreignKey: "providerId" });
+      this.hasMany(models.Riff, { foreignKey: "providerId" });
       this.belongsTo(models.Account, { foreignKey: "accountId" });
     }
   }

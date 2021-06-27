@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 // import * as util from "../../lib/util";
-import { postProvider as api } from "../../lib/provider";
+import { postSong as api } from "../../lib/song";
 
-const ProviderCreateContainer = ({ match }) => {
-  const [provider, setProvider] = useState({
-    name: "ytb-learning-guitar",
-    description: 'this is easy lecture from free youtube guitar course.',
+const SongCreateContainer = ({ match }) => {
+  const [song, setSong] = useState({
+    title: "song title",
+    description: 'singer... produced at... easy or...',
   });
 
   const [err, setErr] = useState({
@@ -14,8 +14,8 @@ const ProviderCreateContainer = ({ match }) => {
   });
 
   const handleChange = (e, field) => {
-    setProvider({
-      ...provider,
+    setSong({
+      ...song,
       [field]: e.target.value,
     });
   };
@@ -23,7 +23,7 @@ const ProviderCreateContainer = ({ match }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!provider.name) {
+    if (!song.name) {
       setErr({
         ...err,
         msg: "name is required",
@@ -36,10 +36,11 @@ const ProviderCreateContainer = ({ match }) => {
     });
 
     api({
-      provider: provider,
+        provider: match.params.provider,
+        song,
     }).then((res) => {
       if (res.data.result === "success") {
-        window.location.href = `/chord/list/${res.data.id}`;
+        window.location.href = `/song/list/${match.params.provider}/${res.data.id}`;
       } else if (res.data.result === "error") {
         setErr({
           ...err,
@@ -54,9 +55,9 @@ const ProviderCreateContainer = ({ match }) => {
   };
 
   return (
-    <form className="provider-input-form" onSubmit={handleSubmit}>
-      <input name="name" value={provider.name} onChange={e => handleChange(e, 'name')} className="name" />
-      <textarea name="description" onChange={e => handleChange(e, 'description')} value={provider.description} maxLength="450" rows="8" className="description" />
+    <form className="song-input-form" onSubmit={handleSubmit}>
+      <input name="name" value={song.title} onChange={e => handleChange(e, 'title')} className="name" />
+      <textarea name="description" onChange={e => handleChange(e, 'description')} value={song.description} maxLength="450" rows="8" className="description" />
 
       <input type="submit" className="submit" value="submit" />
 
@@ -67,4 +68,4 @@ const ProviderCreateContainer = ({ match }) => {
   );
 };
 
-export default ProviderCreateContainer;
+export default SongCreateContainer;

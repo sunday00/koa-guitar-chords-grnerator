@@ -1,13 +1,19 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Chords", {
+    await queryInterface.createTable('Songs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER(11).UNSIGNED,
+        type: Sequelize.INTEGER(11).UNSIGNED
       },
-      setId: {
+      title: {
+        type: Sequelize.STRING(100)
+      },
+      description: {
+        type: Sequelize.STRING(255)
+      },
+      providerId: {
         type: Sequelize.INTEGER(11).UNSIGNED,
         allowNull: false,
         references: {
@@ -17,18 +23,6 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade",
       },
-      name: {
-        type: Sequelize.STRING(10),
-        allowNull: false,
-      },
-      strings: {
-        type: Sequelize.STRING(20),
-        allowNull: false,
-      },
-      memo: {
-        allowNull: true,
-        type: Sequelize.TEXT,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -37,6 +31,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Chords");
-  },
+    await queryInterface.dropTable('Songs');
+  }
 };
