@@ -1,55 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { listChord } from "../../modules/chords";
+import ChordRead from "../../components/chords/ChordsRead";
 
-// import * as util from "../../lib/util";
+import Riff from "../../components/song/Riff";
 import { postRiff as api } from "../../lib/riff";
 
 const RiffCreateContainer = ({ match }) => {
+  const dispatch = useDispatch();
+  const chords = useSelector((state) => state.chords);
+
+  useEffect(() => {
+    dispatch(listChord(match));
+  }, [dispatch, match]);
+
   const [riff, setRiff] = useState({
-    tab1: {
-      chordName: "",
-      beat: "1/8",
-      repeat: 8,
-      subtitle: "",
-      options: {
-        parmMutes: [],
-        upPicking: [],
-        turn: [],
+    tabs: [
+      {
+        chordName: "a",
+        beat: 8,
+        subtitle: "",
+        options: {
+          parmMutes: [],
+          rest: [],
+          upPicking: [1],
+          turn: ">",
+          vibe: [],
+        },
       },
-    },
-    tab2: {
-      chordName: "",
-      beat: "1/8",
-      repeat: 8,
-      subtitle: "",
-      options: {
-        parmMutes: [],
-        upPicking: [],
-        turn: [],
+      {
+        chordName: "em",
+        beat: 4,
+        subtitle: "",
+        options: {
+          parmMutes: [],
+          rest: [],
+          upPicking: [],
+          turn: "",
+          vibe: [],
+        },
       },
-    },
-    tab3: {
-      chordName: "",
-      beat: "1/8",
-      repeat: 8,
-      subtitle: "",
-      options: {
-        parmMutes: [],
-        upPicking: [],
-        turn: [],
+      {
+        chordName: "d",
+        beat: 8,
+        subtitle: "",
+        options: {
+          parmMutes: [6, 7],
+          rest: [],
+          upPicking: [],
+          turn: "both",
+          vibe: [3],
+        },
       },
-    },
-    tab4: {
-      chordName: "",
-      beat: "1/8",
-      repeat: 8,
-      subtitle: "",
-      options: {
-        parmMutes: [],
-        upPicking: [],
-        turn: [],
+      {
+        chordName: "c",
+        beat: 8,
+        subtitle: "",
+        options: {
+          parmMutes: [],
+          rest: [5, 6],
+          upPicking: [],
+          turn: "<",
+          vibe: [],
+        },
       },
+    ],
+    riffOption: {
+      text: "1~2line X 2 ? then go to 3",
     },
-    riffOption: {},
     memo: "",
   });
 
@@ -57,13 +75,23 @@ const RiffCreateContainer = ({ match }) => {
     msg: "",
   });
 
+  const getChord = (name) => {
+    return chords.find((c) => c.name === name);
+  };
+
   const handleChangeTab = (e, tab, field) => {
+    const newTabs = Array.from(riff.tabs).map((t, i) => {
+      if (i === tab) {
+        return {
+          ...t,
+          [field]: e.target.value,
+        };
+      }
+      return t;
+    });
     setRiff({
       ...riff,
-      [tab]: {
-        ...riff[tab],
-        [field]: e.target.value,
-      },
+      tabs: newTabs,
     });
   };
 
@@ -111,6 +139,17 @@ const RiffCreateContainer = ({ match }) => {
 
   return (
     <form className="riff-input-form" onSubmit={handleSubmit}>
+      {riff.tabs.map((t, i) => {
+        return (
+          <figure key={i}>
+            <ChordRead chord={getChord(t.chordName)} />
+            <Riff riff={t} />
+          </figure>
+        );
+      })}
+
+      <p className="riff-option-text">{riff.riffOption.text}</p>
+
       <input type="submit" className="submit" value="submit" />
 
       <p className={`err ${err.msg && "active"}`} onClick={handleErr}>
