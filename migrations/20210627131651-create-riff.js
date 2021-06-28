@@ -32,6 +32,16 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade",
       },
+      songId: {
+        type: Sequelize.Sequelize.INTEGER(11).UNSIGNED,
+        allowNull: false,
+        references: {
+          model: "songs",
+          key: "id",
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade",
+      },
       version: {
         type: Sequelize.STRING,
       },
