@@ -11,6 +11,22 @@ exports.list = async (ctx, next) => {
   await next();
 };
 
+exports.read = async (ctx, next) => {
+  let data = await db.Song.findOne({
+    attributes: ["id", "title", "description", "providerId", "createdAt"],
+    where: {
+      providerId: ctx.params.provider,
+      id: ctx.params.song,
+    },
+    include: {
+      model: db.Riff,
+    },
+  });
+
+  ctx.body = data;
+  await next();
+};
+
 exports.create = async (ctx, next) => {
   const { providerId, song } = ctx.request.body;
 

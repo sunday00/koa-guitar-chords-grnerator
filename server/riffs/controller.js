@@ -34,6 +34,7 @@ exports.create = async (ctx, next) => {
     .then((result) => {
       ctx.body = {
         result: "success",
+        songId: song,
         id: result.id,
       };
 

@@ -188,9 +188,17 @@ body {
     }
   }
 
-  .riff-input-form{
+  .song-read{
+    padding: 0;
+    margin-left: 0;
+    padding-inline-start: 0;
+  }
+
+  .riff-input-form, .song-read li{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+
+    list-style: none;
 
     figure, svg{
       width: 100%;

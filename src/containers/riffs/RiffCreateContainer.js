@@ -130,7 +130,7 @@ const RiffCreateContainer = ({ match }) => {
       riff,
     }).then((res) => {
       if (res.data.result === "success") {
-        window.location.href = `/song/read/${match.params.provider}/${res.data.id}`;
+        window.location.href = `/song/read/${match.params.provider}/${res.data.songId}`;
       } else if (res.data.result === "error") {
         setErr({
           ...err,

@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Provider, { foreignKey: "providerId" });
+      this.hasMany(models.Riff, { foreignKey: "songId" });
     }
   }
   Song.init(
