@@ -201,7 +201,26 @@ body {
       border-top: 2px solid #3c3c3c;
     }
 
-    .riff-option-text {
+    fieldset {
+      display: flex;
+      flex-direction: column;
+
+      label{
+        width: 100%;
+        span{
+          display: inline-block;
+          width: 35%;
+          text-align: right;
+          margin-right: 5%;
+        }
+
+        input{
+          width: 55%;
+        }
+      }
+    }
+
+    .riff-option-text, .riff-option-memo {
       grid-column: 1 / 5;
       margin: 0;
       padding: 0.5rem;
@@ -209,6 +228,13 @@ body {
       font-size: 1.2rem;
       background-color: #fff;
       border-bottom: 2px solid #3c3c3c;
+    }
+
+    input[type="submit"]{
+      grid-column: 1 / 5;
+      font-size: 1.2rem;
+      background-color: cornflowerblue;
+      color: #eee;
     }
   }
 }
