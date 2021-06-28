@@ -5,6 +5,7 @@ import {
   faList,
   faGuitar,
   faMusic,
+  faPencilAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = ({ pathname }) => {
@@ -29,13 +30,11 @@ const Footer = ({ pathname }) => {
             <>
               <li>
                 <a href={`/chord/create/${pathname.split("/")[3]}`}>
-                  {" "}
                   <FontAwesomeIcon icon={faGuitar} />
                 </a>
               </li>
               <li>
                 <a href={`/song/create/${pathname.split("/")[3]}`}>
-                  {" "}
                   <FontAwesomeIcon icon={faMusic} />
                 </a>
               </li>
@@ -45,14 +44,30 @@ const Footer = ({ pathname }) => {
             <>
               <li>
                 <a href={`/chord/create/${pathname.split("/")[3]}`}>
-                  {" "}
                   <FontAwesomeIcon icon={faGuitar} />
                 </a>
               </li>
               <li>
                 <a href={`/song/create/${pathname.split("/")[3]}`}>
-                  {" "}
                   <FontAwesomeIcon icon={faMusic} />
+                </a>
+              </li>
+            </>
+          )}
+          {pathname.startsWith("/song/read") && (
+            <>
+              <li>
+                <a href={`/song/list/${pathname.split("/")[3]}`}>
+                  <FontAwesomeIcon icon={faList} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`/riff/create/${pathname.split("/")[3]}/${
+                    pathname.split("/")[4]
+                  }`}
+                >
+                  <FontAwesomeIcon icon={faPencilAlt} />
                 </a>
               </li>
             </>
