@@ -1,6 +1,4 @@
-const {
-  Model
-} = require('sequelize');
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Riff extends Model {
     /**
@@ -12,27 +10,36 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Provider, { foreignKey: "providerId" });
       this.belongsTo(models.Song, { foreignKey: "songId" });
     }
-  };
-  Riff.init({
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    tab1: DataTypes.STRING(255),
-    tab2: DataTypes.STRING(255),
-    tab3: DataTypes.STRING(255),
-    tab4: DataTypes.STRING(255),
-    riffOption: DataTypes.STRING(255),
-    providerId: {
-      type: DataTypes.INTEGER,
-      references: { model: "Provider", key: "id" },
+  }
+  Riff.init(
+    {
+      id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+      tab1: DataTypes.STRING(255),
+      tab2: DataTypes.STRING(255),
+      tab3: DataTypes.STRING(255),
+      tab4: DataTypes.STRING(255),
+      riffOption: DataTypes.STRING(255),
+      providerId: {
+        type: DataTypes.INTEGER,
+        references: { model: "Provider", key: "id" },
+      },
+      songId: {
+        type: DataTypes.INTEGER,
+        references: { model: "Song", key: "id" },
+      },
+      version: DataTypes.STRING(10),
+      memo: DataTypes.STRING(255),
+      createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        allowNull: true,
+      },
     },
-    songId: {
-      type: DataTypes.INTEGER,
-      references: { model: "Song", key: "id" },
-    },
-    version: DataTypes.STRING(10),
-    memo: DataTypes.STRING(255)
-  }, {
-    sequelize,
-    modelName: 'Riff',
-  });
+    {
+      sequelize,
+      timestamps: false,
+      modelName: "Riff",
+    }
+  );
   return Riff;
 };

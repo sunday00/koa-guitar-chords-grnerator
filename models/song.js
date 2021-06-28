@@ -1,6 +1,4 @@
-const {
-  Model
-} = require('sequelize');
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Song extends Model {
@@ -12,18 +10,27 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.Provider, { foreignKey: "providerId" });
     }
-  };
-  Song.init({
-    title: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    description:  { type: DataTypes.TEXT, allowNull: true },
-    providerId: {
-      type: DataTypes.INTEGER,
-      references: { model: "Provider", key: "id" },
+  }
+  Song.init(
+    {
+      id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+      title: DataTypes.TEXT,
+      description: { type: DataTypes.TEXT, allowNull: true },
+      providerId: {
+        type: DataTypes.INTEGER,
+        references: { model: "Provider", key: "id" },
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        allowNull: true,
+      },
     },
-    createdAt: DataTypes.TIME
-  }, {
-    sequelize,
-    modelName: 'Song',
-  });
+    {
+      sequelize,
+      timestamps: false,
+      modelName: "Song",
+    }
+  );
   return Song;
 };

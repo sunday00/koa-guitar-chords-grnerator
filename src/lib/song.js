@@ -6,6 +6,7 @@ export const getSongs = () => {
 
 export const postSong = (params) => {
   return client.post(`/api/song/create`, {
+    providerId: params.provider,
     song: params.song,
   });
 };

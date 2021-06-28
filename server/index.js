@@ -5,6 +5,7 @@ const bodyParser = require("koa-bodyparser");
 const accounts = require("./accounts");
 const providers = require("./providers");
 const chords = require("./chords");
+const songs = require("./songs");
 
 const app = new Koa();
 const router = new Router();
@@ -13,6 +14,7 @@ app.use(bodyParser());
 
 router.use("/account", accounts.routes());
 router.use("/api/provider", providers.routes());
+router.use("/api/song", songs.routes());
 router.use("/api/chord", chords.routes());
 
 // router.get("/", (ctx, next) => {

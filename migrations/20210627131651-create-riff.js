@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('riffs', {
+    await queryInterface.createTable("riffs", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -8,19 +8,19 @@ module.exports = {
         type: Sequelize.INTEGER(11).UNSIGNED,
       },
       tab1: {
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(255),
       },
       tab2: {
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(255),
       },
       tab3: {
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(255),
       },
       tab4: {
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(255),
       },
       riffOption: {
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(255),
       },
       providerId: {
         type: Sequelize.Sequelize.INTEGER(11).UNSIGNED,
@@ -33,22 +33,18 @@ module.exports = {
         onDelete: "cascade",
       },
       version: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       memo: {
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(255),
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('riffs');
-  }
+    await queryInterface.dropTable("riffs");
+  },
 };

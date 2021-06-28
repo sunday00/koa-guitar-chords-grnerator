@@ -6,7 +6,7 @@ import { postSong as api } from "../../lib/song";
 const SongCreateContainer = ({ match }) => {
   const [song, setSong] = useState({
     title: "song title",
-    description: 'singer... produced at... easy or...',
+    description: "singer... produced at... easy or...",
   });
 
   const [err, setErr] = useState({
@@ -36,8 +36,8 @@ const SongCreateContainer = ({ match }) => {
     });
 
     api({
-        provider: match.params.provider,
-        song,
+      provider: match.params.provider,
+      song,
     }).then((res) => {
       if (res.data.result === "success") {
         window.location.href = `/song/list/${match.params.provider}/${res.data.id}`;
@@ -56,8 +56,20 @@ const SongCreateContainer = ({ match }) => {
 
   return (
     <form className="song-input-form" onSubmit={handleSubmit}>
-      <input name="name" value={song.title} onChange={e => handleChange(e, 'title')} className="name" />
-      <textarea name="description" onChange={e => handleChange(e, 'description')} value={song.description} maxLength="450" rows="8" className="description" />
+      <input
+        name="name"
+        value={song.title}
+        onChange={(e) => handleChange(e, "title")}
+        className="name"
+      />
+      <textarea
+        name="description"
+        onChange={(e) => handleChange(e, "description")}
+        value={song.description}
+        maxLength="450"
+        rows="8"
+        className="description"
+      />
 
       <input type="submit" className="submit" value="submit" />
 
