@@ -1,15 +1,14 @@
 const db = require("../../models");
 
 exports.list = async (ctx, next) => {
-  // let data = await db.Provider.findAll({
-  //   attributes: ["id", "name", "description", "createdAt"],
-  //   // TODO:
-  //   // where: {
-  //   //   userId: ...
-  //   // },
-  // });
-  // ctx.body = data;
-  // await next();
+  let data = await db.Song.findAll({
+    attributes: ["id", "title", "description", "providerId", "createdAt"],
+    where: {
+      providerId: ctx.params.provider,
+    },
+  });
+  ctx.body = data;
+  await next();
 };
 
 exports.create = async (ctx, next) => {

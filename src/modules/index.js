@@ -6,16 +6,18 @@ import { all } from "redux-saga/effects";
 
 import auth, { authSaga } from "./auth";
 import chords, { chordSaga } from "./chords";
+import songs, { songSaga } from "./songs";
 import providers, { providerSaga } from "./providers";
 
 const rootReducer = combineReducers({
   auth,
   chords,
+  songs,
   providers,
 });
 
 export function* rootSaga() {
-  yield all([authSaga(), chordSaga(), providerSaga()]);
+  yield all([authSaga(), chordSaga(), songSaga(), providerSaga()]);
 }
 
 const sagaMiddleware = createSagaMiddleware();

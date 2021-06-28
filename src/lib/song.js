@@ -1,7 +1,7 @@
 import client from "./client";
 
-export const getSongs = () => {
-  return client.get("/api/song/list");
+export const getSongs = (params) => {
+  return client.get(`/api/song/list/${params}`);
 };
 
 export const postSong = (params) => {

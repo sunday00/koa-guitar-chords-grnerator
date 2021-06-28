@@ -4,7 +4,7 @@ const { checkToken } = require("../utils/jwt");
 const api = new Router();
 const controller = require("./controller");
 
-api.get("/list", controller.list);
+api.get("/list/:provider", controller.list);
 
 api.use(checkToken).post("/create", controller.create);
 
