@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       timestamps: false,
       modelName: "Riff",
+      tableName: "riffs",
     }
   );
   return Riff;

@@ -27,7 +27,6 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     main.login(user).then((res) => {
       if (res.data.result === "success") {
         

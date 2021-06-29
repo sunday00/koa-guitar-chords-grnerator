@@ -1,15 +1,16 @@
-https://stackoverflow.com/questions/64813775/is-there-any-way-to-fix-package-lock-json-lockfileversion-so-npm-uses-a-specific
+connect ssh server
 
-https://github.com/felixrieseberg/npm-windows-upgrade
+npm i axios dotenv jsonwebtoken koa koa-bodyparser koa-router koa-send koa-static mysql2 sequelize sequelize-cli
 
-npm install --global --production npm-windows-upgrade
+upload react built folder, server, models, config, models at same folder
+    -- don't worry. I make front page that folder. not in somewhere under server folder.
 
-Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
+setting .env
+setting config/config.json
 
-npm-windows-upgrade --npm-version latest
+npx sequelize db:migrate
 
-https://ithub.tistory.com/219
-https://victorydntmd.tistory.com/116
-https://velog.io/@yaytomato/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%90%EC%84%9C-%EC%95%88%EC%A0%84%ED%95%98%EA%B2%8C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0
+pm2 start server/index.js
 
-openssl rand -hex 64
+http://your-site/account/generate once
+
