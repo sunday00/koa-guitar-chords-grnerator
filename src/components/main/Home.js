@@ -11,7 +11,7 @@ const Home = ({ providers }) => {
           return (
             <li key={i}>
               <span>{p.name} : </span>
-              <a href={`/chord/list/${p.id}`}>cords</a>
+              <a href={`/chord/list/${p.id}`}>chords</a>
               <a href={`/song/list/${p.id}`}>songs</a>
             </li>
           );
