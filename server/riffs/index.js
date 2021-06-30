@@ -4,8 +4,12 @@ const { checkToken } = require("../utils/jwt");
 const api = new Router();
 const controller = require("./controller");
 
+api.get("/read/:id", controller.read);
 api.get("/list", controller.list);
 
-api.use(checkToken).post("/create", controller.create);
+api
+  .use(checkToken)
+  .post("/create", controller.create)
+  .patch("/update", controller.update);
 
 module.exports = api;

@@ -12,6 +12,7 @@ import ProviderCreateContainer from "./containers/providers/ProviderCreateContai
 import SongCreateContainer from "./containers/songs/SongCreateContainer";
 import SongListContainer from "./containers/songs/SongListContainer";
 import RiffCreateContainer from "./containers/riffs/RiffCreateContainer";
+import RiffEditContainer from "./containers/riffs/RiffEditContainer";
 import SongReadContainer from "./containers/songs/SongReadContainer";
 import Footer from "./components/main/Footer";
 
@@ -70,6 +71,11 @@ function App() {
           <Route
             render={(props) => <RiffCreateContainer {...props} />}
             path="/riff/create/:provider/:song"
+            exact
+          />
+          <Route
+            render={(props) => <RiffEditContainer {...props} />}
+            path="/riff/edit/:provider/:song/:riff"
             exact
           />
           <Route

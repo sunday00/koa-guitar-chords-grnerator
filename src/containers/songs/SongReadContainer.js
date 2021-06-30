@@ -40,7 +40,11 @@ const SongReadContainer = ({ match }) => {
                     return (
                       <figure key={y}>
                         <ChordRead chord={chord} />
-                        <Riff riff={data} />
+                        <a
+                          href={`/riff/edit/${match.params.provider}/${match.params.song}/${r.id}`}
+                        >
+                          <Riff riff={data} />
+                        </a>
                       </figure>
                     );
                   })}

@@ -40,6 +40,51 @@ exports.create = async (ctx, next) => {
     });
 };
 
+exports.update = async (ctx, next) => {
+  const { provider, chord } = ctx.request.body;
+
+  const { id, name, strings, memo } = chord;
+
+  const modifiedStrings = strings.map((s) => {
+    switch (s) {
+      case true:
+        return "t";
+      case false:
+        return "f";
+      default:
+        return s;
+    }
+  });
+
+  await db.Chord.update(
+    {
+      setId: provider,
+      strings: modifiedStrings.join("/"),
+      name,
+      memo,
+    },
+    {
+      where: { id: chord.id },
+    }
+  )
+    .then((result) => {
+      ctx.body = {
+        result: "success",
+        id: chord.id,
+      };
+
+      next();
+    })
+    .catch((err) => {
+      ctx.body = {
+        result: "error",
+        message: err.message,
+      };
+
+      next();
+    });
+};
+
 exports.list = async (ctx, next) => {
   let data = await db.Chord.findAll({
     attributes: ["id", "setId", "name", "strings", "memo", "createdAt"],

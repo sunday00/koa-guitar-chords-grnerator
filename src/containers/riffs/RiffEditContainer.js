@@ -4,17 +4,14 @@ import { listChord } from "../../modules/chords";
 import ChordRead from "../../components/chords/ChordsRead";
 
 import Riff from "../../components/song/Riff";
-import { postRiff as api } from "../../lib/riff";
+import * as api from "../../lib/riff";
 
 const RiffCreateContainer = ({ match }) => {
   const dispatch = useDispatch();
   const chords = useSelector((state) => state.chords);
 
-  useEffect(() => {
-    dispatch(listChord(match));
-  }, [dispatch, match]);
-
   const [riff, setRiff] = useState({
+    id: undefined,
     tabs: [
       {
         chordName: "",
@@ -75,6 +72,23 @@ const RiffCreateContainer = ({ match }) => {
     msg: "",
   });
 
+  useEffect(() => {
+    dispatch(listChord(match));
+
+    api.getRiff(match.params.riff).then((res) => {
+      const tabs = [
+        JSON.parse(res.data.tab1),
+        JSON.parse(res.data.tab2),
+        JSON.parse(res.data.tab3),
+        JSON.parse(res.data.tab4),
+      ];
+
+      if (res.status === 200) {
+        setRiff((r) => ({ ...r, id: res.data.id, tabs }));
+      }
+    });
+  }, [match, dispatch]);
+
   const getChord = (name) => {
     return chords.find((c) => c.name === name);
   };
@@ -124,20 +138,22 @@ const RiffCreateContainer = ({ match }) => {
       msg: "wait...",
     });
 
-    api({
-      provider: match.params.provider,
-      song: match.params.song,
-      riff,
-    }).then((res) => {
-      if (res.data.result === "success") {
-        window.location.href = `/song/read/${match.params.provider}/${res.data.songId}`;
-      } else if (res.data.result === "error") {
-        setErr({
-          ...err,
-          msg: res.data.message,
-        });
-      }
-    });
+    api
+      .patchRiff({
+        provider: match.params.provider,
+        song: match.params.song,
+        riff,
+      })
+      .then((res) => {
+        if (res.data.result === "success") {
+          window.location.href = `/song/read/${match.params.provider}/${res.data.songId}`;
+        } else if (res.data.result === "error") {
+          setErr({
+            ...err,
+            msg: res.data.message,
+          });
+        }
+      });
   };
 
   const handleErr = (e) => {

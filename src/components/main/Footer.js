@@ -89,15 +89,6 @@ const Footer = ({ pathname }) => {
                   <FontAwesomeIcon icon={faPencilAlt} />
                 </a>
               </li>
-              <li>
-                <a
-                  href={`/riff/create/${pathname.split("/")[3]}/${
-                    pathname.split("/")[4]
-                  }`}
-                >
-                  <FontAwesomeIcon icon={faPencilAlt} />
-                </a>
-              </li>
             </>
           )}
         </ul>
