@@ -26,3 +26,10 @@ export const postChord = (params) => {
     chord: params.chord,
   });
 };
+
+export const patchChord = (params) => {
+  return client.patch(`/api/chord/update`, {
+    provider: params.provider,
+    chord: params.chord,
+  });
+};

@@ -7,6 +7,7 @@ import Header from "./containers/main/Header";
 import ChordReadContainer from "./containers/chords/ChordReadContainer";
 import ChordListContainer from "./containers/chords/ChordListContainer";
 import ChordCreateContainer from "./containers/chords/ChordCreateContainer";
+import ChordEditContainer from "./containers/chords/ChordEditContainer";
 import ProviderCreateContainer from "./containers/providers/ProviderCreateContainer";
 import SongCreateContainer from "./containers/songs/SongCreateContainer";
 import SongListContainer from "./containers/songs/SongListContainer";
@@ -33,6 +34,11 @@ function App() {
           <Route
             render={(props) => <ChordCreateContainer {...props} />}
             path="/chord/create/:provider"
+            exact
+          />
+          <Route
+            render={(props) => <ChordEditContainer {...props} />}
+            path="/chord/edit/:provider/:id"
             exact
           />
           <Route

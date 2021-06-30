@@ -39,8 +39,7 @@ const ProviderCreateContainer = ({ match }) => {
       provider: provider,
     }).then((res) => {
       if (res.data.result === "success") {
-        console.log(res.data);
-        // window.location.href = `/chord/list/${res.data.id}`;
+        window.location.href = `/chord/list/${res.data.id}`;
       } else if (res.data.result === "error") {
         setErr({
           ...err,

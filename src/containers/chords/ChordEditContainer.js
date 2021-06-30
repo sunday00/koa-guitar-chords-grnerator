@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChordRead from "../../components/chords/ChordsRead";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckSquare, faSquare } from "@fortawesome/free-solid-svg-icons";
 
 import * as util from "../../lib/util";
-import { postChord as api } from "../../lib/chord";
+import * as api from "../../lib/chord";
 
-const ChordCreateContainer = ({ match }) => {
+const ChordEditContainer = ({ match }) => {
   const [chord, setChord] = useState({
-    name: "a",
-    strings: [true, 2, 2, 2, true, false],
+    id: undefined,
+    name: "",
+    strings: [],
     memo: "",
   });
 
@@ -19,8 +21,27 @@ const ChordCreateContainer = ({ match }) => {
     faCheckSquare,
     faCheckSquare,
     faCheckSquare,
-    faSquare,
+    faCheckSquare,
   ]);
+
+  const initChecked = (data) => {
+    let newChecked = [];
+    data.strings.forEach((s, i) => {
+      const tORf = s !== false;
+      document.querySelector(`[name="string${i + 1}"]`).checked = tORf;
+      newChecked.push(tORf ? faCheckSquare : faSquare);
+    });
+    setCheckIcon(newChecked);
+  };
+
+  useEffect(() => {
+    api.getChord(match).then((res) => {
+      if (res.status === 200) {
+        setChord(res.data);
+        initChecked(res.data);
+      }
+    });
+  }, [match]);
 
   const [err, setErr] = useState({
     msg: "",
@@ -113,19 +134,21 @@ const ChordCreateContainer = ({ match }) => {
       msg: "wait...",
     });
 
-    api({
-      provider: match.params.provider,
-      chord: chord,
-    }).then((res) => {
-      if (res.data.result === "success") {
-        window.location.href = `/chord/read/${match.params.provider}/${res.data.id}`;
-      } else if (res.data.result === "error") {
-        setErr({
-          ...err,
-          msg: res.data.message,
-        });
-      }
-    });
+    api
+      .patchChord({
+        provider: match.params.provider,
+        chord: chord,
+      })
+      .then((res) => {
+        if (res.data.result === "success") {
+          window.location.href = `/chord/read/${match.params.provider}/${res.data.id}`;
+        } else if (res.data.result === "error") {
+          setErr({
+            ...err,
+            msg: res.data.message,
+          });
+        }
+      });
   };
 
   const handleErr = (e) => {
@@ -162,7 +185,7 @@ const ChordCreateContainer = ({ match }) => {
               type="checkbox"
               name="string6"
               data-no="6"
-              defaultChecked={false}
+              defaultChecked={true}
               onChange={handleCheck}
               id="string6"
             />
@@ -229,6 +252,7 @@ const ChordCreateContainer = ({ match }) => {
                 className="memo"
                 name="memo"
                 onChange={(e) => handleChangeMemo(e)}
+                value={chord.memo || ""}
               />
             </fieldset>
           </div>
@@ -252,6 +276,7 @@ const ChordCreateContainer = ({ match }) => {
                 onChange={(e) => handleChangeName(e)}
                 type="text"
                 maxLength="8"
+                value={chord.name}
                 placeholder="ex) g7"
                 required
               />
@@ -270,4 +295,4 @@ const ChordCreateContainer = ({ match }) => {
   );
 };
 
-export default ChordCreateContainer;
+export default ChordEditContainer;
