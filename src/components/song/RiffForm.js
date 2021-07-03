@@ -84,8 +84,10 @@ const RiffForm = ({ match, handleSubmit }) => {
           JSON.parse(res.data.tab4),
         ];
 
+        console.log(res.data.memo)
+
         if (res.status === 200) {
-          setRiff((r) => ({ ...r, id: res.data.id, tabs }));
+          setRiff((r) => ({ ...r, id: res.data.id, tabs, memo: res.data.memo }));
         }
       });
   }, [match, dispatch]);
@@ -296,11 +298,9 @@ const RiffForm = ({ match, handleSubmit }) => {
       <input
         className="riff-option-memo"
         onChange={(e) =>
-          handleChangeOptions(e, "memo", {
-            text: e.target.value,
-          })
+          handleChangeOptions(e, "memo", e.target.value)
         }
-        value={riff.riffOption.memo}
+        value={riff.memo}
         placeholder="some memo"
       />
 

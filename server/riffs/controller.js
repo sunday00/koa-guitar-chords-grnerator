@@ -48,7 +48,7 @@ exports.create = async (ctx, next) => {
     tab3: JSON.stringify(tabs[2]),
     tab4: JSON.stringify(tabs[3]),
     riffOption: JSON.stringify(riffOption),
-    memo: memo.text,
+    memo: memo,
     version: process.env.VERSION,
   })
     .then((result) => {
@@ -86,7 +86,7 @@ exports.update = async (ctx, next) => {
       tab3: JSON.stringify(tabs[2]),
       tab4: JSON.stringify(tabs[3]),
       riffOption: JSON.stringify(riffOption),
-      memo,
+      memo: memo,
       version: process.env.VERSION,
     },
     {
